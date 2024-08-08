@@ -1,0 +1,16 @@
+{
+  "name": "03-bases-node",
+  "version": "0.0.1",
+  "description": "Tabla de multiplicar que genera un archivo .txt",
+  "main": "app.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "base5": "node app.mjs --base=5"
+  },
+  "author": "Stefano Solis",
+  "license": "MIT",
+  "dependencies": {
+    "colors": "^1.0.0",
+    "npm": "^10.8.2"
+  }
+}
