@@ -30,7 +30,7 @@ console.log(process.argv);
 
 Entonces sabemos que con este comando `process.argc` podemos escribir elementos en un `"array"` gracias a esto, podemos recuperar este valor para de esta manera poder mandar la base de nuestra tabla de multiplicar directamente desde la consola
 
-**Ejemeplo**
+**Ejemplo**
 En la consola ejecutamos el comando ` node .\app.mjs --base=11`, esto imprimirá el siguiente resultado en consola:
 
 ```javascript
@@ -51,7 +51,7 @@ Entonces cuando mandamos un `--base=10` el valor de nuestra variable `"baseConso
 
 Para extraer unicamente el valor numerico de la base hacemos lo siguiente: `const base = baseConsola.split("=")[1];`
 
-Lo que hace este codigo es que separa este string `"--base=10"` despues del signo `"="` esto hace que tengamos 2 elementos en un array `"--base="` y `"10"`. Lo qu eresta sería extraer el valor que queremos, y este esta en la posición `"[1]"`
+Lo que hace este codigo es que separa este string `"--base=10"` despues del signo `"="` esto hace que tengamos 2 elementos en un array `"--base="` y `"10"`. Lo que resta sería extraer el valor que queremos, y este esta en la posición `"[1]"`
 
 # Creación de package.json
 
@@ -94,10 +94,6 @@ About to write to A:\Personal\Udemy\Node\03-bases-node\package.json:
 
 
 Is this OK? (yes)
-
-
- kirak on Annie at …\03-bases-node
-
 ```
 
 # Agregamos un comando para ejecutar de diferentes manera desde consola
@@ -147,3 +143,56 @@ En este caso hemos instalado el paquete `"npm"` de `"colors"` y se nos crea la d
 ## Actualizar dependencias
 
 `npm update`
+
+# yargs
+
+- "yargs" es una biblioteca de Node.js que facilita el análisis de argumentos de línea de comandos. Proporciona una forma sencilla de definir y analizar los argumentos pasados a través de la línea de comandos en una aplicación Node.js. Con "yargs", puedes crear interfaces de línea de comandos más robustas y flexibles para tus programas.
+
+En el ejempli usaremos `"yargs"` de la siguiente manera:
+
+```javascript
+import yargs from "yargs";
+import { hideBin } from "yargs/helpers";
+
+const argv = yargs(hideBin(process.argv)).argv;
+
+console.clear();
+
+console.log(process.argv);
+console.log(argv);
+```
+
+- `"hideBin"` es una utilidad que ayuda a quitar la parte inicial de los argumentos (node y el archivo que estás ejecutando), dejando solo los argumentos que realmente deseas procesar.
+
+Tendríamos el siguiente resultado en consola:
+
+```javascript
+[
+  'C:\\Program Files\\nodejs\\node.exe',
+  'A:\\Personal\\Udemy\\Node\\03-bases-node\\app.mjs',
+  '--base=12'
+]
+{ _: [], base: 12, '$0': 'app.mjs' }
+```
+
+## Ventajas de `"yargs"`
+
+- Con `"yargs"`, podemos mandar esto por consola: `"node .\app.mjs --base 12 --listar"` y esto funcionará sin errores de nomenclatura. Si usáramos solo `"process.argv"`, esto generaría un resultado menos intuitivo, donde los argumentos estarían separados:
+
+```javascript
+[
+  'C:\\Program Files\\nodejs\\node.exe',
+  'A:\\Personal\\Udemy\\Node\\03-bases-node\\app.mjs',
+  '--base',
+  '12',
+  '--listar'
+]
+{ _: [], base: 12, listar: true, '$0': 'app.mjs' }
+base: yargs 12
+```
+
+- Como vemos el primer resultado tiene un error de nomenclatura, ya que me crea `"--base"` y en otra instancia `"12"` y luego `"--listar"`**Pero con `"yargs"` nos crea la `base : 12` y como no le pasamos un valor a listar nos lo inicializa en true `"listar: true"`**
+
+## Conclusión
+
+- `"yargs"` es una herramienta poderosa que simplifica el manejo de argumentos de línea de comandos, evitando errores comunes y proporcionando una sintaxis clara y manejable para nuestras aplicaciones en Node.js.
