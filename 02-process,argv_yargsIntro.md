@@ -148,7 +148,7 @@ En este caso hemos instalado el paquete `"npm"` de `"colors"` y se nos crea la d
 
 - "yargs" es una biblioteca de Node.js que facilita el análisis de argumentos de línea de comandos. Proporciona una forma sencilla de definir y analizar los argumentos pasados a través de la línea de comandos en una aplicación Node.js. Con "yargs", puedes crear interfaces de línea de comandos más robustas y flexibles para tus programas.
 
-En el ejempli usaremos `"yargs"` de la siguiente manera:
+En el ejemplo usaremos `"yargs"` de la siguiente manera:
 
 ```javascript
 import yargs from "yargs";
