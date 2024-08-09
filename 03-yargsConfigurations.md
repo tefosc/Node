@@ -86,7 +86,8 @@ La base tiene que ser un número
 
 **Además si no hay errores, retornamos `"true"` es decir que el código siga funcionando**
 
-**Ejercicio**
+## **Ejercicio**
+
 Con esta teoria tenemos que hacer que la aplicación reciba un nuevo parametro `"l"` o `"listar"` que cuando nos lo manden por consola con un valor de `"true"` o `"false"` la tabla del número dado se muestre o no, esta opción no será requerida, o sea que la podemos mandar o no, si no la mandamos no nos mostrará nada, pero si la mandamos y usamos `"true"` si nos la mostrará.
 
 - Solución:
@@ -188,3 +189,63 @@ tabla-11.txt creado
 ```
 
 Vemos que en ambos caso funciona correctamente, y como el campo no es requerido no nos dará error si no mandamos la bándera -l
+
+## Separando lógica
+
+Colocamos una nueva bandera en `"package.json"` con `"type": "module",` para poder usa `import` y `export`
+
+Esta configuración se hace para configurar el proyecto de Node.js para que use modulos ES, podemos hacerlo de 2 manera, colocando el `"type": "module",` o agregando `.mjs` a los archivos
+
+### Comparación de métodos
+
+- Con `"type": "module"`: Todos los archivos `.js` en el proyecto serán tratados como módulos ES. Es conveniente si prefieres mantener la extensión `.js` para todos tus archivos.
+
+- Con `.mjs`: Solo los archivos con la extensión `.mjs` se tratarán como módulos ES. Es útil si deseas tener un proyecto mixto con archivos `.js` (para CommonJS) y `.mjs` (para ESM).
+
+**Para esta carpeta únicamente usaremos `.mjs`**
+
+**Nota**
+
+- CommonJS(CJS): Usa `require` para importar módulos y `module.exports` o `exports` para exportar.
+
+- ECMAScript Modules(ESM): Usa `import` para importar módulos y `export` para exportar.
+
+## Agregando descripciones para el --help de nuestra app
+
+```javascript
+import yargs from "yargs";
+import { hideBin } from "yargs/helpers";
+
+export const argv = yargs(hideBin(process.argv))
+  .option("b", {
+    alias: "base",
+    type: "number",
+    demandOption: true,
+    describe: "Es la base de la tabla de multiplicar",
+  })
+  .option("l", {
+    alias: "listar",
+    type: "boolean",
+    default: false,
+    describe: "Muestra la tabla en consola",
+  })
+  .check((argv, options) => {
+    if (isNaN(argv.base)) {
+      throw "La base tiene que ser un número";
+    }
+    return true;
+  }).argv;
+```
+
+Cada vez que el usuario haga ` node .\app.mjs --help` en nuestra app le mostrará esto:
+
+```javascript
+ kirak on Annie at …\03-bases-node via  master   node .\app.mjs --help
+Options:
+      --help     Show help                                             [boolean]
+      --version  Show version number                                   [boolean]
+  -b, --base     Es la base de la tabla de multiplicar       [number] [required]
+  -l, --listar   Muestra la tabla en consola          [boolean] [default: false]
+```
+
+**Se mostrará una pequeña descripción de que hace cada comando 😺**
