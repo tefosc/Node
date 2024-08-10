@@ -30,7 +30,7 @@ export const createFile = async (base = 5, listar = false, limite = 10) => {
       console.log(colors.data(consola));
     }
 
-    writeFileSync(`tabla-${base}.txt`, data, "utf-8");
+    writeFileSync(`./salida/tabla-${base}.txt`, data);
 
     return `tabla-${base}.txt`;
   } catch (e) {
