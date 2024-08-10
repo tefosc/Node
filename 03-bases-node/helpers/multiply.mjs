@@ -1,24 +1,39 @@
 import { writeFileSync } from "node:fs";
+import colors from "colors";
 
-export const createFile = async (base = 5, listar = false) => {
+colors.setTheme({
+  explain: "brightCyan",
+  error: "brightRed",
+  signo: "brightMagenta",
+  rainbow: "rainbow",
+  base: "brightYellow",
+  data: "cyan",
+  textEnd: "brightGreen",
+});
+
+export const createFile = async (base = 5, listar = false, limite = 10) => {
   try {
     let data = "";
+    let consola = "";
 
-    for (let i = 1; i <= 12; i++) {
+    for (let i = 1; i <= limite; i++) {
       data += `\n ${base} x ${i} = ${base * i} `;
+      consola += `\n ${base} ${colors.signo("x ")}${i} ${"=".signo} ${
+        base * i
+      } `;
     }
 
     if (listar) {
-      console.log("======================");
-      console.log("Tabla del: ", base);
-      console.log("======================");
-      console.log(data);
+      console.log(colors.rainbow("======================"));
+      console.log(colors.explain("Tabla del: "), colors.base(base));
+      console.log(colors.rainbow("======================"));
+      console.log(colors.data(consola));
     }
 
-    writeFileSync(`tabla-${base}.txt`, data);
+    writeFileSync(`tabla-${base}.txt`, data, "utf-8");
 
     return `tabla-${base}.txt`;
   } catch (e) {
-    throw e;
+    throw colors.error(e);
   }
 };
