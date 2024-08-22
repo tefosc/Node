@@ -24,7 +24,7 @@ console.log(colors.rainbow("======================"));
 console.log(colors.data(data));
 ```
 
-\*\*Se tuvo un error, y es que cuando colocamos colores en la data resultante esta no puede ser leida, por lo que se planteó la siguiente solución:
+Se tuvo un error, y es que cuando colocamos colores en la data resultante esta no puede ser leida, por lo que se planteó la siguiente solución:
 
 ```javascript
 import { writeFileSync } from "node:fs";
