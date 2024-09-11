@@ -206,3 +206,30 @@ main();
 
 De esta manera, tendríamos una vista ordenada y amigable sin necesidad de hacerlo manualmente.
 Ademas se ha agregado la funcionalidad para que tenga una pausa cada que el usuario seleccione una opción.
+
+## Instalación de `nanoid`
+
+`nanoid` es una biblioteca de JavaScript que se utiliza para generar identificadores únicos y aleatorios. Estos identificadores suelen ser cortos y están diseñados para ser únicos en el contexto de una aplicación. A diferencia de otros generadores de identificadores, `nanoid` es eficiente en términos de tamaño y velocidad.
+
+### Conceptos clave:
+
+- **Tamaño Personalizable:** Permite generar identificadores de longitud personalizada, lo que es útil para ajustarse a requisitos específicos de tu aplicación.
+
+- **Alta Entropía:** Los identificadores generados son criptográficamente seguros, lo que reduce significativamente la probabilidad de colisiones (es decir, dos identificadores iguales).
+
+- **Uso Común:** Ideal para asignar identificadores únicos a objetos en aplicaciones web, bases de datos, y más.
+
+- [Documentación oficial de nanoid](https://github.com/ai/nanoid)
+
+### Ejemplo básico usando `nanoid`
+
+```javascript
+import { customAlphabet } from "nanoid";
+
+const nanoid = customAlphabet("1234567890abcdef", 10);
+const id = nanoid(); // Genera un identificador único de 10 caracteres
+
+console.log(id); // Ejemplo de salida: 'V1StTt8tM6'
+```
+
+En este ejemplo, `nanoid` genera un identificador único de **10 caracteres** utilizando el conjunto de caracteres `1234567890abcdef`.

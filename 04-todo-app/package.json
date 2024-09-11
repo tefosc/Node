@@ -12,6 +12,7 @@
   "description": "",
   "dependencies": {
     "colors": "^1.4.0",
-    "inquirer": "^10.2.0"
+    "inquirer": "^10.2.0",
+    "nanoid": "^5.0.7"
   }
 }
