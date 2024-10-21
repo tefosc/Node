@@ -7,7 +7,7 @@ export const guardarDB = (data) => {
 
 export const leerDB = () => {
   if (!existsSync(archivo)) {
-    return "hola";
+    return null;
   }
 
   const info = readFileSync(archivo, { encoding: "utf-8" });

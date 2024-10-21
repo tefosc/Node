@@ -738,6 +738,67 @@ main();
 
 ## Leer el archivo creado
 
-```javascript
+En la clase Tareas hacemos:
 
+```javascript
+cargarTareasFromArray(tareas) {
+    tareas.forEach((tarea) => {
+      this._listado[tarea.id] = tarea;
+    });
+  }
+```
+
+En guardarArchivo.js hacemos:
+
+```javascript
+export const leerDB = () => {
+  if (!existsSync(archivo)) {
+    return null;
+  }
+
+  const info = readFileSync(archivo, { encoding: "utf-8" });
+  const data = JSON.parse(info);
+  console.log(data);
+
+  return data;
+};
+```
+
+Y en app.js :
+
+```javascript
+import colors from "colors";
+import { inquirerMenu, pausa, leerInput } from "./helpers/inquirer.js";
+import { Tareas } from "./models/tareas.js";
+import { guardarDB, leerDB } from "./helpers/guardarArchivo.js";
+
+const main = async () => {
+  let opcion = "";
+  const tareas = new Tareas();
+
+  const tareasDB = leerDB();
+
+  if (tareasDB) {
+    tareas.cargarTareasFromArray(tareasDB);
+  }
+
+  do {
+    opcion = await inquirerMenu();
+
+    switch (opcion) {
+      case "1":
+        const desc = await leerInput("Descripción: ");
+        tareas.crearTarea(desc);
+        break;
+      case "2":
+        console.log(tareas.listadoArr);
+        break;
+    }
+    guardarDB(tareas.listadoArr);
+
+    await pausa();
+  } while (opcion !== "0");
+};
+
+main();
 ```
