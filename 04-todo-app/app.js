@@ -1,7 +1,7 @@
 import colors from "colors";
 import { inquirerMenu, pausa, leerInput } from "./helpers/inquirer.js";
 import { Tareas } from "./models/tareas.js";
-//const { mostrarMenu, saludo, pausa } = require("./helpers/mensajes");
+import { guardarDB } from "./helpers/guardarArchivo.js";
 
 const main = async () => {
   let opcion = "";
@@ -19,6 +19,7 @@ const main = async () => {
         console.log(tareas.listadoArr);
         break;
     }
+    // guardarDB(tareas.listadoArr);
 
     await pausa();
   } while (opcion !== "0");

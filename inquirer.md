@@ -685,3 +685,53 @@ main();
 - Estamos usando un switch para las opciones 1 y 2. En la opcion 1 usamos `leerInput` que retorna la descripción que el usuario está ingresando, esta decripcion la guardamos en una constante llamada `desc`. Luego, usaremos el metodo `crearTarea` la que recibe una descripcion para poder crear la tarea.
 
 - En la opción 2 simplemente mostramos al usuario las tareas creadas en formato de array, gracias al geter `listadoArr`
+
+## Uso de `writeFileSync` para guardar datos en un archivo .txt.
+
+Creamos una función con `writeFileSync` para guardar el archivo en la carpeta deseada y llamamos esta función luego del switch inicial:
+
+1. Función para guardar la `"data"` en un archivo llamado `"data.txt"`
+
+**Nota:** Tenemos que transformar la data a un string para que funcione, ya que no acepta arrays. Llamada de la función para guardar la data en formato de `"array"`
+
+```javascript
+import { writeFileSync } from "node:fs";
+
+export const guardarDB = (data) => {
+  const archivo = "./db/data.json";  <== //podriamos cambiar el formato a .json
+  writeFileSync(archivo, JSON.stringify(data)); <===//acá
+};
+```
+
+```javascript
+import { inquirerMenu, pausa, leerInput } from "./helpers/inquirer.js";
+import { Tareas } from "./models/tareas.js";
+import { guardarDB } from "./helpers/guardarArchivo.js";
+
+const main = async () => {
+  let opcion = "";
+  const tareas = new Tareas();
+
+  do {
+    opcion = await inquirerMenu();
+
+    switch (opcion) {
+      case "1":
+        const desc = await leerInput("Descripción: ");
+        tareas.crearTarea(desc);
+        break;
+      case "2":
+        console.log(tareas.listadoArr);
+        break;
+    }
+    guardarDB(tareas.listadoArr);   <=== //ESTO
+
+    await pausa();
+  } while (opcion !== "0");
+};
+
+main();
+
+```
+
+**Si cerramos la app y la volvemos a ejectutar**
