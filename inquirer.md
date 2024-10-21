@@ -734,4 +734,10 @@ main();
 
 ```
 
-**Si cerramos la app y la volvemos a ejectutar**
+**Si cerramos la app y la volvemos a ejectutar se perderá la data anterior**
+
+## Leer el archivo creado
+
+```javascript
+
+```
